@@ -1,9 +1,5 @@
 from flask import Flask, request, jsonify
-from dataclasses import dataclass
 
-@dataclass
-class Result:
-    result: int
 app = Flask(__name__)
 
 @app.route("/calculator/greeting", methods=['GET'])
@@ -12,15 +8,31 @@ def greeting():
 
 @app.route("/calculator/add", methods=['POST'])
 def add():
-    numbers = request.json
-    response = Result(numbers['first']+numbers['second'])
-    return jsonify(response)
+    try:
+        data = request.json  # Assuming the client sends JSON data
+        if 'x' in data and 'y' in data:
+            x = data['x']
+            y = data['y']
+            result = x + y
+            return jsonify({"result": result})
+        else:
+            return jsonify({"error": "Invalid input data"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/calculator/subtract", methods=['POST'])
 def subtract():
-    numbers = request.json
-    response = Result(numbers['first']-numbers['second'])
-    return jsonify(response)
+    try:
+        data = request.json  # Assuming the client sends JSON data
+        if 'x' in data and 'y' in data:
+            x = data['x']
+            y = data['y']
+            result = x - y
+            return jsonify({"result": result})
+        else:
+            return jsonify({"error": "Invalid input data"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(port=8080,host='0.0.0.0')
+    app.run(port=8080, host='0.0.0.0')
