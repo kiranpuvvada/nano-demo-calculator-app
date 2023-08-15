@@ -10,7 +10,7 @@ def greeting():
 def add():
     try:
         data = request.json # Assuming the client sends JSON data
-        if 'first' in data and 'second' in data
+        if 'first' in data and 'second' in data:
             x = data['first']
             y = data['second']
             result = x + y
