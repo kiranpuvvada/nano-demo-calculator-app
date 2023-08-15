@@ -9,10 +9,10 @@ def greeting():
 @app.route("/calculator/add", methods=['POST'])
 def add():
     try:
-        data = request.json  # Assuming the client sends JSON data
-        if 'x' in data and 'y' in data:
-            x = data['x']
-            y = data['y']
+        data = request.json # Assuming the client sends JSON data
+        if 'first' in data and 'second' in data:
+            x = data['first']
+            y = data['second']
             result = x + y
             return jsonify({"result": result})
         else:
@@ -24,9 +24,9 @@ def add():
 def subtract():
     try:
         data = request.json  # Assuming the client sends JSON data
-        if 'x' in data and 'y' in data:
-            x = data['x']
-            y = data['y']
+        if 'first' in data and 'second' in data:
+            x = data['first']
+            y = data['second']
             result = x - y
             return jsonify({"result": result})
         else:
